@@ -32,13 +32,13 @@ function imprimePerro(per){
 }
 
 function imprimePerroRaza(per){
+    let raza = JSON.stringify(per)
     perritos.innerHTML = ""
     perritos.innerHTML = `
     <div class="card col-lg-3 col-xs-12 col-md-6">
         <div class="personaje">
         <div class="card-body">
-        <h3 class="card-header">${per.message}</h3>
-        <img style="height: 200px; width: 100%; display: block;"   alt="Card image">
+        <p class="card-header">${raza}</p>
         </div>
         </div>
         </div>
@@ -47,13 +47,13 @@ function imprimePerroRaza(per){
 
 
 function imprimePerroImagen(per){
+    let imagen = JSON.stringify(per)
     perritos.innerHTML = ""
     perritos.innerHTML = `
     <div class="card col-lg-3 col-xs-12 col-md-6">
         <div class="personaje">
         <div class="card-body">
-        <h3 class="card-header">${per}</h3>
-        <img style="height: 200px; width: 100%; display: block;" src="${per}"  alt="Card image">
+        <img style="height: 200px; width: 100%; display: block;" src="${imagen}"  alt="Card image">
         </div>
         </div>
         </div>
@@ -78,8 +78,7 @@ const buscaPerro = async ()=> {
 const buscaPerroRaza = async ()=> {
     try {
         let res = await axios.get(API_ALLPerroRaza);
-        console.log(res)
-        let aquiEstaPerro = await res.data;
+        let aquiEstaPerro = await res.data.message;
         console.log(aquiEstaPerro)
         imprimePerroRaza(aquiEstaPerro)
     } catch (error) {
@@ -92,9 +91,9 @@ const buscaPerroImg = async ()=> {
     try {
         let res = await axios.get(API_ALLPerro);
         console.log(res)
-        let aquiEstaPerro = await res.data;
+        let aquiEstaPerro = await res.data.message;
         console.log(aquiEstaPerro)
-        // imprimePerroImagen(aquiEstaPerro)
+        imprimePerroImagen(aquiEstaPerro)
     } catch (error) {
         console.error(error)
     }
